@@ -6,4 +6,4 @@ This site contains my coursework and reflections for ECON 238.
 
 ## Assignments
 
-Assignment links will be added here as the semester progresses.
+- [Week Four: Storm deaths fell as the U.S. grew](week-04/)

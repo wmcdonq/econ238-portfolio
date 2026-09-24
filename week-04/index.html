@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An ECON 238 look at U.S. storm deaths, population, migration, and adaptation.">
+  <title>Storm deaths fell as the U.S. grew | ECON 238</title>
+  <style>
+    :root {
+      --ink: #12202d;
+      --muted: #526476;
+      --paper: #f7f2e8;
+      --white: #fffdf8;
+      --blue: #176b87;
+      --blue-dark: #0d4154;
+      --orange: #e86f3a;
+      --gold: #f0ba50;
+      --line: #d9d1c3;
+      --shadow: 0 18px 45px rgba(26, 42, 54, .10);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+    a { color: var(--blue-dark); }
+    .hero {
+      color: #fff;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(240,186,80,.35), transparent 20rem),
+        linear-gradient(135deg, #0b3b4c, #176b87 65%, #2189a7);
+      padding: 5rem 1.25rem 4.5rem;
+    }
+    .wrap { width: min(1100px, calc(100% - 2rem)); margin: 0 auto; }
+    .eyebrow { margin: 0 0 1rem; letter-spacing: .13em; font-size: .78rem; font-weight: 700; text-transform: uppercase; }
+    h1 { max-width: 900px; margin: 0; font-size: clamp(3rem, 8vw, 6.8rem); line-height: .93; letter-spacing: -.055em; }
+    .deck { max-width: 780px; margin: 1.6rem 0 0; font-size: clamp(1.15rem, 2.4vw, 1.55rem); line-height: 1.45; }
+    .meta { display: flex; flex-wrap: wrap; gap: .7rem 1.4rem; margin-top: 2rem; font-size: .92rem; opacity: .9; }
+    main { padding: 3.5rem 0 5rem; }
+    .lead { max-width: 820px; margin: 0 auto 3rem; font-size: 1.22rem; }
+    .finding {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 2rem 0 3rem;
+    }
+    .stat { padding: 1.4rem; border-top: 5px solid var(--orange); background: var(--white); box-shadow: var(--shadow); }
+    .stat strong { display: block; color: var(--blue-dark); font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1; }
+    .stat span { display: block; margin-top: .55rem; color: var(--muted); }
+    .panel { margin: 2rem 0; padding: clamp(1.2rem, 3vw, 2.2rem); background: var(--white); box-shadow: var(--shadow); }
+    .panel h2 { margin: 0 0 .45rem; color: var(--blue-dark); font-size: clamp(1.55rem, 3vw, 2.25rem); line-height: 1.15; }
+    .kicker { margin: 0 0 1.4rem; color: var(--muted); }
+    .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+    .chart-box { padding: 1rem; border: 1px solid var(--line); background: #fff; }
+    .chart-box h3 { margin: 0 0 .35rem; font-size: 1.05rem; }
+    .chart-box p { margin: 0 0 .8rem; color: var(--muted); font-size: .9rem; }
+    svg { display: block; width: 100%; height: auto; }
+    .axis { stroke: #9ba9b3; stroke-width: 1; }
+    .grid { stroke: #e7e1d8; stroke-width: 1; }
+    .label { fill: #4d6070; font-size: 10px; }
+    .value { fill: #12202d; font-size: 10px; font-weight: 700; }
+    .bar { fill: var(--blue); }
+    .bar.partial { fill: #72a8b8; }
+    .line { fill: none; stroke: var(--orange); stroke-width: 4; }
+    .dot { fill: var(--orange); stroke: #fff; stroke-width: 2; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+    .note { padding: 1.25rem; border-left: 5px solid var(--gold); background: #fff6df; }
+    .bars { display: grid; gap: 1rem; margin: 1.3rem 0; }
+    .bar-row { display: grid; grid-template-columns: 8rem 1fr 5rem; align-items: center; gap: .8rem; }
+    .track { height: 1.2rem; background: #e7ecee; }
+    .fill { height: 100%; width: var(--w); background: linear-gradient(90deg, var(--blue-dark), var(--blue)); }
+    .number { text-align: right; font-variant-numeric: tabular-nums; }
+    .plain-table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+    .plain-table th, .plain-table td { padding: .55rem .6rem; border-bottom: 1px solid var(--line); text-align: right; }
+    .plain-table th:first-child, .plain-table td:first-child { text-align: left; }
+    .sources li { margin-bottom: .7rem; }
+    .download {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: .9rem 1.1rem;
+      color: #fff;
+      background: var(--orange);
+      border-radius: 4px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    footer { padding: 2rem 1rem; color: #dceaf0; background: #0b3443; }
+    @media (max-width: 760px) {
+      .finding, .charts, .two-col { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 6rem 1fr 4.5rem; gap: .5rem; font-size: .9rem; }
+      .hero { padding-top: 3.5rem; }
+    }
+    @media print {
+      .hero { padding: 2rem 0; }
+      .panel, .stat { box-shadow: none; }
+      .download { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">ECON 238 · Week Four · Fall 2026</p>
+      <h1>Storm deaths fell as the U.S. grew</h1>
+      <p class="deck">The U.S. has more people than it did in the 1940s. Many people have also moved to states that get strong storms. Still, the death rate from tornadoes, floods, and hurricanes is much lower now.</p>
+      <div class="meta"><span>Walter McDonald</span><span>University of Rochester</span><span>Data through 2023</span></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <p class="lead">A storm is a hazard. People and buildings in its path are exposed to it. Forecasts, safe buildings, shelters, roads, power, and health care can limit the harm. That is why a strong storm does not always kill more people. It is also why a lower death rate does not mean storms are safe.</p>
+
+    <section class="finding" aria-label="Main findings">
+      <div class="stat"><strong>262</strong><span>deaths a year in the 1940s from tornadoes, floods, and hurricanes</span></div>
+      <div class="stat"><strong>195</strong><span>deaths a year in the 2010s from the same three hazards</span></div>
+      <div class="stat"><strong>−67%</strong><span>change in deaths per million people from the 1940s to the 2010s</span></div>
+    </section>
+
+    <section class="panel">
+      <h2>Population changes the story</h2>
+      <p class="kicker">The count fell, but the population-adjusted rate fell much more.</p>
+      <div class="charts">
+        <div class="chart-box">
+          <h3>Average deaths each year</h3>
+          <p>Tornado + flood + hurricane fatalities</p>
+          <svg viewBox="0 0 520 300" role="img" aria-label="Bar chart of average yearly storm deaths by decade">
+            <line class="grid" x1="48" y1="55" x2="508" y2="55"/><line class="grid" x1="48" y1="125" x2="508" y2="125"/><line class="grid" x1="48" y1="195" x2="508" y2="195"/>
+            <line class="axis" x1="48" y1="265" x2="508" y2="265"/>
+            <text class="label" x="6" y="59">300</text><text class="label" x="12" y="129">200</text><text class="label" x="12" y="199">100</text><text class="label" x="28" y="269">0</text>
+            <rect class="bar" x="60" y="81" width="34" height="184"/><rect class="bar" x="110" y="50" width="34" height="215"/>
+            <rect class="bar" x="160" y="68" width="34" height="197"/><rect class="bar" x="210" y="53" width="34" height="212"/>
+            <rect class="bar" x="260" y="143" width="34" height="122"/><rect class="bar" x="310" y="145" width="34" height="120"/>
+            <rect class="bar" x="360" y="100" width="34" height="165"/><rect class="bar" x="410" y="128" width="34" height="137"/>
+            <rect class="bar partial" x="460" y="123" width="34" height="142"/>
+            <text class="value" x="77" y="75" text-anchor="middle">262</text><text class="value" x="127" y="44" text-anchor="middle">308</text>
+            <text class="value" x="177" y="62" text-anchor="middle">282</text><text class="value" x="227" y="47" text-anchor="middle">302</text>
+            <text class="value" x="277" y="137" text-anchor="middle">174</text><text class="value" x="327" y="139" text-anchor="middle">171</text>
+            <text class="value" x="377" y="94" text-anchor="middle">236</text><text class="value" x="427" y="122" text-anchor="middle">195</text>
+            <text class="value" x="477" y="117" text-anchor="middle">203</text>
+            <g class="label" text-anchor="middle"><text x="77" y="286">1940s</text><text x="127" y="286">50s</text><text x="177" y="286">60s</text><text x="227" y="286">70s</text><text x="277" y="286">80s</text><text x="327" y="286">90s</text><text x="377" y="286">00s</text><text x="427" y="286">10s</text><text x="477" y="286">20–23*</text></g>
+          </svg>
+        </div>
+        <div class="chart-box">
+          <h3>Deaths per million people</h3>
+          <p>Same deaths, divided by average U.S. population</p>
+          <svg viewBox="0 0 520 300" role="img" aria-label="Line chart of storm deaths per million people by decade">
+            <line class="grid" x1="48" y1="55" x2="508" y2="55"/><line class="grid" x1="48" y1="125" x2="508" y2="125"/><line class="grid" x1="48" y1="195" x2="508" y2="195"/>
+            <line class="axis" x1="48" y1="265" x2="508" y2="265"/>
+            <text class="label" x="12" y="59">2.0</text><text class="label" x="12" y="129">1.3</text><text class="label" x="12" y="199">0.7</text><text class="label" x="28" y="269">0</text>
+            <path class="line" d="M77 71 L127 70 L177 110 L227 117 L277 188 L327 197 L377 181 L427 201 L477 201"/>
+            <g><circle class="dot" cx="77" cy="71" r="6"/><circle class="dot" cx="127" cy="70" r="6"/><circle class="dot" cx="177" cy="110" r="6"/><circle class="dot" cx="227" cy="117" r="6"/><circle class="dot" cx="277" cy="188" r="6"/><circle class="dot" cx="327" cy="197" r="6"/><circle class="dot" cx="377" cy="181" r="6"/><circle class="dot" cx="427" cy="201" r="6"/><circle class="dot" cx="477" cy="201" r="6"/></g>
+            <text class="value" x="77" y="57" text-anchor="middle">1.85</text><text class="value" x="427" y="222" text-anchor="middle">0.61</text>
+            <g class="label" text-anchor="middle"><text x="77" y="286">1940s</text><text x="127" y="286">50s</text><text x="177" y="286">60s</text><text x="227" y="286">70s</text><text x="277" y="286">80s</text><text x="327" y="286">90s</text><text x="377" y="286">00s</text><text x="427" y="286">10s</text><text x="477" y="286">20–23*</text></g>
+          </svg>
+        </div>
+      </div>
+      <p><strong>What I did:</strong> I added U.S. deaths from the three hazards for each year in the National Weather Service record. I found each decade's yearly average. I divided that by the decade's average U.S. population. The 2020-23 bar is only four years, so it is shown in a lighter color.</p>
+      <p>This may be a sign that people learned how to stay safer. Forecasts got better. Buildings got safer. Warnings can reach people faster. Rescue teams and health care also got better. These things cost money. They also need rules and public services that work.</p>
+    </section>
+
+    <section class="two-col">
+      <article class="panel">
+        <h2>People still move toward risk</h2>
+        <p>IRS address data show large net moves into three hurricane-exposed states in 2020-21.</p>
+        <div class="bars" aria-label="Net domestic migration into Florida, Texas, and North Carolina">
+          <div class="bar-row"><span>Florida</span><div class="track"><div class="fill" style="--w:100%"></div></div><span class="number">262k</span></div>
+          <div class="bar-row"><span>Texas</span><div class="track"><div class="fill" style="--w:69.8%"></div></div><span class="number">183k</span></div>
+          <div class="bar-row"><span>N. Carolina</span><div class="track"><div class="fill" style="--w:30.3%"></div></div><span class="number">79k</span></div>
+        </div>
+        <p>This is a clue that some people accept more storm risk. They may care more about a job, warm weather, family, taxes, or housing costs.</p>
+        <div class="note"><strong>Be careful:</strong> A move into a state is not the same as a move into a floodplain or hurricane zone. This chart cannot prove why people moved.</div>
+      </article>
+      <article class="panel">
+        <h2>Risk is more than weather</h2>
+        <p>The IPCC found that more people and more property in exposed places were the main cause of long-run growth in disaster losses. After adjusting for population and wealth, the report did not tie the long-run rise in losses to climate change, but it did not rule out a climate role.</p>
+        <p>People choose a whole package. A coastal home may be close to a job or family. It may also have a view and a chance of flooding.</p>
+        <p>Policy should make danger and cost clear. It should not make other people pay for a risk they did not choose.</p>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>The temperature numbers are different</h2>
+      <p>The Burke team looks at deaths linked to normal hot and cold days. They do not only count people listed as storm deaths by the National Weather Service. The team estimates that temperature may play a part in 5% to 12% of all deaths in the countries they study. They also find that cold kills more people than heat in every place they study.</p>
+      <div class="note"><strong>Do not mix the measures.</strong> NWS numbers are direct reports tied to named weather hazards. The Burke numbers are estimates based on how death rates change when temperatures change.</div>
+      <p>The paper says many heat plans do not have strong proof behind them. Home weatherization is one example. Some programs cut hospital visits. Their energy savings were often smaller than expected. We need to ask what a program costs, who pays, and if the same money could save more lives another way.</p>
+    </section>
+
+    <section class="panel">
+      <h2>But wait</h2>
+      <p>The lower death rate does not prove that every safety program worked. The numbers do not tell us what would have happened without warming. They also leave out injuries, lost homes, stress, and money lost. The NWS may list hurricane deaths under wind, flood, or tornado. Records may also be better in recent years.</p>
+      <p>My claim is limited. The U.S. has gotten much better at keeping people alive during these three storm hazards. This happened even as more people moved to risky places. That is real progress, but there is still more work to do.</p>
+      <p><strong>The storm matters, but so do our choices about where we live, what we build, and how we prepare.</strong></p>
+      <a class="download" href="extreme-weather-risk-poster.pdf">Download the matching 18 × 24 poster PDF</a>
+    </section>
+
+    <section class="panel">
+      <h2>Data and method</h2>
+      <p>The population for a full decade is the midpoint of the Census count at the start and end of that decade. This is a simple estimate, not a yearly population series. The 2020-23 row uses the 2020 Census population and only four years of death data.</p>
+      <div style="overflow-x:auto">
+        <table class="plain-table">
+          <thead><tr><th>Period</th><th>Deaths/year</th><th>Population (millions)</th><th>Deaths/million</th></tr></thead>
+          <tbody>
+            <tr><td>1940s</td><td>262.3</td><td>141.7</td><td>1.851</td></tr><tr><td>1950s</td><td>307.7</td><td>165.3</td><td>1.861</td></tr>
+            <tr><td>1960s</td><td>281.9</td><td>191.3</td><td>1.474</td></tr><tr><td>1970s</td><td>302.2</td><td>214.9</td><td>1.406</td></tr>
+            <tr><td>1980s</td><td>173.6</td><td>237.6</td><td>0.731</td></tr><tr><td>1990s</td><td>171.1</td><td>265.1</td><td>0.645</td></tr>
+            <tr><td>2000s</td><td>235.9</td><td>295.1</td><td>0.799</td></tr><tr><td>2010s</td><td>195.1</td><td>320.1</td><td>0.610</td></tr>
+            <tr><td>2020-23*</td><td>202.5</td><td>331.4</td><td>0.611</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel sources">
+      <h2>Sources</h2>
+      <ol>
+        <li><a href="https://www.weather.gov/media/hazstat/80years_2023.pdf">National Weather Service, 80-Year List of Severe Weather Fatalities, 1940-2023</a>.</li>
+        <li><a href="https://www.census.gov/data/tables/time-series/dec/popchange-data-text.html">U.S. Census Bureau, Historical Population Change Data, 1940-2020</a>.</li>
+        <li><a href="https://www.irs.gov/pub/irs-pdf/p5508.pdf">Internal Revenue Service, U.S. Population Migration Data, 2020-2021</a>.</li>
+        <li><a href="https://www.nber.org/papers/w34313">Marshall Burke et al., Understanding and Addressing Temperature Impacts on Mortality, 2025</a>.</li>
+        <li><a href="https://archive.ipcc.ch/pdf/special-reports/srex/SREX_Full_Report.pdf">IPCC, Managing the Risks of Extreme Events and Disasters to Advance Climate Change Adaptation, 2012</a>.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer><div class="wrap">Walter McDonald · ECON 238 · University of Rochester · Fall 2026</div></footer>
+</body>
+</html>

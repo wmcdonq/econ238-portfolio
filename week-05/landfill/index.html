@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>How much landfill space would we need? | ECON 238</title><meta name="description" content="How much landfill space would we need?. A sourced, repeatable Week 5 SHOW ME investigation."><link rel="stylesheet" href="../style.css"></head><body><main><nav><a href="../">Week 5 exhibits</a></nav><header><p class="meta">Walter McDonald · ECON 238 · Class list · WW-60 · October 4, 2026</p><h1>How much landfill space would we need?</h1></header>
+<p class="lead">At the EPA's 2018 disposal rate, 100 years of U.S. household and business trash would cover about <strong>642 km²</strong> if it were packed 30 meters deep. That is a square about 25.3 km on each side. This is a size estimate, not a plan to put all the trash in one place.</p>
+<figure><img src="cover.svg" alt="At constant 2018 waste flow and 30 meters depth: 10 years needs 64 square kilometers, 50 years needs 321, and 100 years needs 642."><figcaption>The bars start at zero and use the same scale. Density: 688 kg/m³. These are calculated scenarios, not forecasts.</figcaption></figure>
+<h2>What changes the answer?</h2>
+<div class="table-scroll"><table><thead><tr><th scope="col">100-year case</th><th scope="col">Waste footprint</th></tr></thead><tbody><tr><th scope="row">Baseline</th><td>642 km²</td></tr><tr><th scope="row">Recycle an extra 10%</th><td>578 km²</td></tr><tr><th scope="row">Compost an extra 10%</th><td>578 km²</td></tr><tr><th scope="row">Do both</th><td>514 km²</td></tr><tr><th scope="row">Waste grows 1% per year</th><td>1,095 km²</td></tr><tr><th scope="row">1% growth, plus both changes</th><td>876 km²</td></tr></tbody></table></div>
+<p>Here, “extra 10%” means 10% of the trash that would otherwise go to a landfill. The recycling and composting cases remove different material, so nothing is counted twice. Existing recycling is already left out of the baseline.</p>
+<p>Doing both cuts the area by 128 km². But if trash grows 1% each year, the same two changes still need 876 km². Over a long time, slow growth adds up.</p>
+<h2>Space is only part of the cost</h2>
+<p>A country may have enough total land and still have a local landfill problem. Trucks must reach the site. Neighbors bear noise and smell. Land also has other uses. Packing waste into less space does not tell us whether disposal is cheap or safe.</p>
+<p>Recycling and composting can save landfill space, but collecting and sorting material also cost money. This model does not price those tradeoffs or count methane. It answers one question: how much room does the waste itself take?</p>
+<details><summary>Inputs, sources, and how to repeat the work</summary>
+<h3>Inputs</h3>
+<ul><li><strong>146.1 million U.S. short tons per year:</strong> waste landfilled in 2018, not all waste produced. This is the latest year in EPA's national Facts and Figures series checked on October 4, 2026. It is not a measurement of 2026 waste.</li>
+<li><strong>688 kg/m³:</strong> EPA's fallback value for packed waste. The 1997 report gives a range of 653–830 kg/m³. Real sites vary.</li>
+<li><strong>30 meters:</strong> an assumed average thickness of waste across the footprint, about 98 feet. This is not a national average or the height of one daily layer. The 20 and 60 meter cases test this choice.</li>
+<li><strong>Growth and diversion:</strong> chosen tests, not forecasts. Growth starts in year 2. Diversion starts in year 1 and holds the same share each year.</li></ul>
+<h3>The math</h3><pre>1 U.S. short ton = 907.18474 kg
+Total mass = 146,100,000 × 907.18474 × number of years
+Volume = total mass ÷ 688
+Area in km² = volume ÷ 30 ÷ 1,000,000
+
+With yearly growth g, replace “number of years” with:
+((1 + g)^years − 1) ÷ g
+For zero growth, use the number of years.
+Then multiply mass by (1 − extra recycling − extra composting).</pre>
+<p>This treats packed waste as a simple block. It leaves out roads, buffers, cover soil, slopes, liners, and support buildings. It does not subtract space freed by later settling. It also excludes construction debris, sewage sludge, and industrial process waste. Recycling plants and compost sites need their own space, which is not counted here. Removing different materials could change the remaining waste's density; this simple test holds density fixed.</p>
+<h3>More checks on growth, depth, and density</h3>
+<div class="table-scroll"><table><thead><tr><th scope="col">100-year case</th><th scope="col">Waste footprint</th></tr></thead><tbody><tr><th scope="row">Waste grows 2% per year</th><td>2,005 km²</td></tr><tr><th scope="row">20 m average depth</th><td>963 km²</td></tr><tr><th scope="row">60 m average depth</th><td>321 km²</td></tr><tr><th scope="row">Lower density: 653 kg/m³</th><td>677 km²</td></tr><tr><th scope="row">Higher density: 830 kg/m³</th><td>532 km²</td></tr></tbody></table></div>
+<p>Doubling depth halves the footprint in this model. Denser waste also takes less room. Neither change makes the waste or its harm disappear.</p>
+<h3>How AI was used</h3><p>AI found the EPA sources and built a mass-to-volume model. It was asked to compare 10, 50, and 100 years, then change growth, recycling, composting, depth, and density. Checks kept short tons separate from metric tons and avoided subtracting existing recycling twice. The figures are new calculations from those inputs, not a copied chart.</p>
+<p>To extend this work, replace the annual flow with a local figure and add land prices or hauling costs. <a href="data.csv" download>Download all calculations (CSV)</a> or <a href="../model.mjs" download>download the calculation code</a>.</p>
+<h3>Sources</h3><ol class="sources"><li><a href="https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling/national-overview-facts-and-figures-materials">EPA, National Overview of Materials, Wastes and Recycling</a>: 2018 landfilled waste and the scope of municipal solid waste.</li>
+<li><a href="https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling">EPA, Facts and Figures</a>: identifies 2018 as the most recent year in this series.</li>
+<li><a href="https://www.epa.gov/sites/default/files/2020-10/documents/b02s04_0.pdf#page=9">EPA, AP-42 Section 2.4 background report</a>, August 1997, printed p. 2-3 (PDF p. 9): packed-waste density and its range.</li>
+<li><a href="https://www.epa.gov/landfills/municipal-solid-waste-landfills">EPA, Municipal Solid Waste Landfills</a>: site restrictions, liners, water collection, and operating practices.</li></ol>
+</details><footer>AI helped with research, calculation code, charts, and writing. The methods and source links are below the main results. No personal measurements or fieldwork are claimed.</footer></main></body></html>

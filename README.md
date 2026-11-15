@@ -10,3 +10,4 @@ This site contains my coursework and reflections for ECON 238.
 - [Week Eight: When the Recycling Bin Lost Its Buyer — audio lecture](https://wmcdonq.github.io/econ238-portfolio/week-08/recycling-history/)
 - [Week Nine: Who gets the benefit?](week-09/environmental-justice/)
 - [Week Ten: Rochester Notice - college rankings](week-10/moat/)
+- [Week Eleven: Nuclear Power and New Trees](week-11/nuclear-and-trees/)
